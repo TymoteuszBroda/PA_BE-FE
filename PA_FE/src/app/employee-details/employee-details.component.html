@@ -1,0 +1,91 @@
+<div class="container mt-5">
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Employee Information</h2>
+    </div>
+    <div class="card-body" *ngIf="employee">
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>ID:</strong> {{ employee.id }}
+            </li>
+            <li class="list-group-item">
+              <strong>Name:</strong>
+              {{ employee.firstName }} {{ employee.lastName }}
+            </li>
+            <li class="list-group-item">
+              <strong>Position:</strong> {{ employee.position }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Email:</strong> {{ employee.email }}
+            </li>
+            <li class="list-group-item">
+              <strong>Phone:</strong> {{ employee.phone }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!employee" class="card-body text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2">Loading employee details...</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">License granting</h4>
+        <button class="btn btn-success"
+          [routerLink]="['/assign-license', employee.id]">
+          <i class="bi bi-plus-circle"></i> Assign New License
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-body">
+  <h5>Assigned Licenses</h5>
+
+
+  <div *ngIf="assignedLicences.length > 0; else noLicenses">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>License Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let licence of assignedLicences">
+          <td>{{ licence.licenceName }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="onDeleteAssignment(licence.id)">
+              <i class="bi bi-trash"></i> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noLicenses>
+    <div class="alert alert-info">
+      No licenses assigned to this employee
+    </div>
+  </ng-template>
+</div>
+</div>

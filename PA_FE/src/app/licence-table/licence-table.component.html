@@ -1,0 +1,30 @@
+<h2 class="text-center my-5">Licenses</h2>
+<div class="card">
+  <div class="card-header">
+  <p class="fs-5">Overview</p>
+  <div class="card-body">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let licence of licences">
+        <td>{{licence.id}}</td>
+        <td>{{licence.applicationName}}</td>
+        <td>{{licence.quantity}}</td>
+        <td>
+            <button class="btn btn-primary m-2 btn-sm"(click)="editLicence(licence.id)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="decreaseQuantity(licence)" [disabled]="licence.quantity === 0">Delete</button>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>

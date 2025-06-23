@@ -1,0 +1,26 @@
+
+.min-vh-100 {
+  min-height: calc(100vh - 80px);
+}
+
+.fs-0 {
+  font-size: 4rem !important;
+}
+
+.card.border-primary {
+  border-color: rgba(var(--bs-primary-rgb), 0.3) !important;
+}
+
+.btn-lg {
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-lg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.text-secondary {
+  color: #4a5568 !important;
+}

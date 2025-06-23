@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "62+Z7GhV4FMFeMucRpuDuxPb1v4QcwDCCzI7nDrlYko=",
+  "Source": "PermAdminAPI",
+  "BasePath": "_content/PermAdminAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

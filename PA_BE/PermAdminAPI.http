@@ -1,0 +1,6 @@
+@PermAdminAPI_HostAddress = http://localhost:5271
+
+GET {{PermAdminAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

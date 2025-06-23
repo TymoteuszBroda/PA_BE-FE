@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PermAdmin</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/create">Add employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/licences">Licenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/createLicence">Add license</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        @if (accountService.currentUser()) {
+          <div class="text-nowrap">
+            <span class="text-light">Welcome {{accountService.currentUser()?.username | titlecase}}</span>
+            <button class="btn btn-danger btn-sm" (click)="logout()">
+              Logout
+            </button>
+          </div>
+        }
+        @if (!accountService.currentUser()) {
+          <form #loginForm="ngForm"
+                (ngSubmit)="login()"
+                class="d-flex gap-2"
+                autocomplete="off">
+            <input name="username"
+                   [(ngModel)]="model.username"
+                   class="form-control"
+                   type="text"
+                   placeholder="Username"
+                   required>
+            <input name="password"
+                   [(ngModel)]="model.password"
+                   class="form-control"
+                   type="password"
+                   placeholder="Password"
+                   required>
+            <button class="btn btn-success" type="submit">Login</button>
+          </form>
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+@if (!accountService.currentUser()) {
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+      <div class="card border-3 border-primary shadow-lg p-4">
+        <div class="card-body text-center d-flex flex-column justify-content-center py-6">
+          <div class="mb-5 mx-auto">
+            <i class="bi bi-shield-lock-fill text-primary fs-0 mb-4 d-block"></i>
+            <h1 class="display-4 mb-4 text-center mx-auto" style="max-width: 80%;">
+              You need to log in to see content
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+    @if (accountService.currentUser()) {
+      <router-outlet />
+    }
+</div>
