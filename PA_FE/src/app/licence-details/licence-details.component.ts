@@ -69,11 +69,18 @@ export class LicenceDetailsComponent implements OnInit {
   }
 
   mergeAssignments(): void {
-    if (!this.instances.length) return;
-    this.assignments = this.instances.map((inst, idx) => {
+          if (!this.licence) return;
+      const seatCount = Math.max(
+        this.instances.length,
+        this.licence.quantity,
+        this.assignedUsers.length
+      );
+
+      this.assignments = Array.from({ length: seatCount }, (_, idx) => {
+        const inst = this.instances[idx];
       const user = this.assignedUsers[idx];
       return {
-        validTo: inst.validTo,
+        validTo: inst ? inst.validTo : this.licence!.validTo,
         assigned: !!user,
         employeeName: user ? user.employeeName : undefined,
       };
