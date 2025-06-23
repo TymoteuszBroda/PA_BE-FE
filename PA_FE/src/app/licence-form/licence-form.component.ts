@@ -49,7 +49,8 @@ export class LicenceFormComponent implements OnInit {
     if (!this.isEditing) {
       this.licenceService.createLicence(this.licence).subscribe({
         next: (response) => {
-          this.router.navigate(['/']); // Adjust the navigation path as needed
+          // Navigate back to the home page after creating a licence
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.error(err);
@@ -59,7 +60,8 @@ export class LicenceFormComponent implements OnInit {
     } else {
       this.licenceService.editLicence(this.licence).subscribe({
         next: (response) => {
-          this.router.navigate(['/']); // Adjust the navigation path as needed
+          // Navigate back to the home page after editing a licence
+          this.router.navigate(['/']);
         },
         error: (err) => {
           console.error(err);
