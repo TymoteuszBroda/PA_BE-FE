@@ -81,7 +81,8 @@ namespace PermAdminAPI.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("AssignedOn")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<int>("employeeId")
                         .HasColumnType("INTEGER");

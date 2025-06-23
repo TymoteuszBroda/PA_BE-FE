@@ -16,7 +16,7 @@ namespace PermAdminAPI.Data.Migrations
                 table: "EmployeeLicences",
                 type: "TEXT",
                 nullable: false,
-                defaultValue: DateTime.UtcNow);
+                defaultValueSql: "CURRENT_TIMESTAMP");
         }
 
         /// <inheritdoc />
