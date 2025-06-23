@@ -69,6 +69,7 @@ export class LicenceDetailsComponent implements OnInit {
   }
 
   mergeAssignments(): void {
+<<<<<<< HEAD
           if (!this.licence) return;
       const seatCount = Math.max(
         this.instances.length,
@@ -78,6 +79,17 @@ export class LicenceDetailsComponent implements OnInit {
 
       this.assignments = Array.from({ length: seatCount }, (_, idx) => {
         const inst = this.instances[idx];
+=======
+    if (!this.licence) return;
+    const seatCount = Math.max(
+      this.instances.length,
+      this.licence.quantity,
+      this.assignedUsers.length
+    );
+
+    this.assignments = Array.from({ length: seatCount }, (_, idx) => {
+      const inst = this.instances[idx];
+>>>>>>> eaa275f6ba347779478495101feba231d7202433
       const user = this.assignedUsers[idx];
       return {
         validTo: inst ? inst.validTo : this.licence!.validTo,

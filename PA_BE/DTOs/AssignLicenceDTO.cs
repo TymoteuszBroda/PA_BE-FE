@@ -14,4 +14,5 @@ public class AssignLicenceDTO
     public string? EmployeeName { get; set; }
     public string? LicenceName { get; set; }
     public DateTime AssignedOn { get; set; }
+    public DateTime ValidTo { get; set; }
 }

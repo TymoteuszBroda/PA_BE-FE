@@ -134,7 +134,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
                     LicenceName = el.Licence.ApplicationName,
-                    AssignedOn = el.AssignedOn
+                    AssignedOn = el.AssignedOn,
+                    ValidTo = el.Licence.ValidTo
                 })
                 .ToListAsync();
             
@@ -158,7 +159,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 LicenceId = employeeLicence.licenceId,
                 EmployeeName = employeeLicence.Employee.FirstName+" "+employeeLicence.Employee.LastName,
                 LicenceName = employeeLicence.Licence.ApplicationName,
-                AssignedOn = employeeLicence.AssignedOn
+                AssignedOn = employeeLicence.AssignedOn,
+                ValidTo = employeeLicence.Licence.ValidTo
             };
 
             return Ok(dto);
@@ -215,7 +217,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 LicenceId = employeeLicence.licenceId,
                 EmployeeName = $"{employee.FirstName} {employee.LastName}",
                 LicenceName = licence.ApplicationName,
-                AssignedOn = employeeLicence.AssignedOn
+                AssignedOn = employeeLicence.AssignedOn,
+                ValidTo = licence.ValidTo
             });
         }
 
@@ -233,7 +236,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
                     LicenceName = el.Licence.ApplicationName,
-                    AssignedOn = el.AssignedOn
+                    AssignedOn = el.AssignedOn,
+                    ValidTo = el.Licence.ValidTo
                 })
                 .ToListAsync();
             
@@ -254,7 +258,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
                     LicenceName = el.Licence.ApplicationName,
-                    AssignedOn = el.AssignedOn
+                    AssignedOn = el.AssignedOn,
+                    ValidTo = el.Licence.ValidTo
                 })
                 .ToListAsync();
 
