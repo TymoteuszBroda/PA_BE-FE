@@ -235,6 +235,26 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             return Ok(assignedLicences);
         }
 
+        [HttpGet("assigned-licences/licence/{licenceId}")]
+        public async Task<ActionResult<IEnumerable<AssignLicenceDTO>>> GetAssignedLicencesByLicence(int licenceId)
+        {
+            var assignedLicences = await context.EmployeeLicences
+                .Where(el => el.licenceId == licenceId)
+                .Include(el => el.Employee)
+                .Include(el => el.Licence)
+                .Select(el => new AssignLicenceDTO
+                {
+                    Id = el.id,
+                    EmployeeId = el.employeeId,
+                    LicenceId = el.licenceId,
+                    EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
+                    LicenceName = el.Licence.ApplicationName
+                })
+                .ToListAsync();
+
+            return Ok(assignedLicences);
+        }
+
         [HttpDelete("assigned-licences/{id}")]
         public async Task<IActionResult> DeleteAssignedLicence(int id)
         {

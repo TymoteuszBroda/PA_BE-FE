@@ -35,6 +35,10 @@ export class LicenceTableComponent {
     this.router.navigate(['editLicence/', id]);
   }
 
+  showLicenceDetails(id: number): void {
+    this.router.navigate(['licenceDetails/', id]);
+  }
+
     decreaseQuantity(licence: Licence): void {
     if (licence.quantity > 0) {
       const updatedLicence = { ...licence, quantity: licence.quantity - 1 };

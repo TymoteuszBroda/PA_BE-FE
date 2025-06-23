@@ -9,6 +9,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Quantity</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
         <td>{{licence.applicationName}}</td>
         <td>{{licence.quantity}}</td>
         <td>
+            <button class="btn btn-primary m-2 btn-sm" (click)="showLicenceDetails(licence.id)">Users</button>
             <button class="btn btn-primary m-2 btn-sm"(click)="editLicence(licence.id)">Edit</button>
             <button class="btn btn-danger btn-sm" (click)="decreaseQuantity(licence)" [disabled]="licence.quantity === 0">Delete</button>
 
