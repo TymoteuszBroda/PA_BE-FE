@@ -4,4 +4,5 @@ export interface AssignLicenceDTO {
   licenceId: number; // was LicenceId
   employeeName: string; // was EmployeeName
   licenceName: string; // was LicenceName
+  assignedOn?: string;
 }

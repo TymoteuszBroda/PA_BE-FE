@@ -13,4 +13,5 @@ public class AssignLicenceDTO
     public int LicenceId { get; set; }
     public string? EmployeeName { get; set; }
     public string? LicenceName { get; set; }
+    public DateTime AssignedOn { get; set; }
 }

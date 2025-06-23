@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LicenceService } from '../../_services/licence.service';
 import { Licence } from '../../_models/Licence';
 import { AssignLicenceDTO } from '../../_models/AssignLicenceDTO';
+import { LicenceInstance } from '../../_models/LicenceInstance';
 
 @Component({
   selector: 'app-licence-details',
@@ -14,6 +15,7 @@ import { AssignLicenceDTO } from '../../_models/AssignLicenceDTO';
 export class LicenceDetailsComponent implements OnInit {
   licence: Licence | null = null;
   assignedUsers: AssignLicenceDTO[] = [];
+  instances: LicenceInstance[] = [];
   errorMessage = '';
 
   constructor(
@@ -27,6 +29,7 @@ export class LicenceDetailsComponent implements OnInit {
       if (id) {
         this.loadLicence(+id);
         this.loadAssignedUsers(+id);
+        this.loadInstances(+id);
       }
     });
   }
@@ -48,6 +51,13 @@ export class LicenceDetailsComponent implements OnInit {
         console.error('Error loading users', err);
         this.errorMessage = `Failed to load users: ${err.message}`;
       },
+    });
+  }
+
+  loadInstances(id: number): void {
+    this.licenceService.getLicenceInstances(id).subscribe({
+      next: instances => (this.instances = instances),
+      error: err => console.error('Error loading instances', err)
     });
   }
 }

@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Licence } from '../_models/Licence';
 import { AssignLicenceDTO } from '../_models/AssignLicenceDTO';
+import { LicenceInstance } from '../_models/LicenceInstance';
 @Injectable({
   providedIn: 'root',
 })
@@ -48,6 +49,10 @@ export class LicenceService {
     return this.http.delete<void>(
       `${this.apiUrl}/assigned-licences/${assignmentId}`
     );
+  }
+
+  getLicenceInstances(licenceId: number): Observable<LicenceInstance[]> {
+    return this.http.get<LicenceInstance[]>(`${this.apiUrl}/${licenceId}/instances`);
   }
 
   assignLicence(assignDto: AssignLicenceDTO): Observable<AssignLicenceDTO> {

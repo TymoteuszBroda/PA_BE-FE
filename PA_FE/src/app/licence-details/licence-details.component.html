@@ -8,12 +8,24 @@
         <li class="list-group-item"><strong>ID:</strong> {{ licence.id }}</li>
         <li class="list-group-item"><strong>Name:</strong> {{ licence.applicationName }}</li>
         <li class="list-group-item"><strong>Available:</strong> {{ licence.quantity }}</li>
+        <li class="list-group-item"><strong>Expires:</strong> {{ licence.validTo | date }}</li>
       </ul>
     </div>
     <div *ngIf="!licence" class="card-body text-center">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
+    </div>
+  </div>
+
+  <div class="card mb-4" *ngIf="instances.length">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Expiration dates</h4>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let i of instances">{{ i.validTo | date }}</li>
+      </ul>
     </div>
   </div>
 
@@ -27,11 +39,13 @@
           <thead>
             <tr>
               <th>User</th>
+              <th>Assigned On</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of assignedUsers">
               <td>{{ user.employeeName }}</td>
+              <td>{{ user.assignedOn | date }}</td>
             </tr>
           </tbody>
         </table>

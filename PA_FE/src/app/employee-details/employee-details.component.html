@@ -64,12 +64,14 @@
       <thead>
         <tr>
           <th>License Name</th>
+          <th>Assigned On</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let licence of assignedLicences">
           <td>{{ licence.licenceName }}</td>
+          <td>{{ licence.assignedOn | date }}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
