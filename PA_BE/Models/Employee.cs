@@ -16,7 +16,7 @@ namespace PermAdminAPI.Models
         public string Email { get; set; }
         
         [Required(ErrorMessage = "Phone number is required")]
-        [Length(9, 13)]
+        [StringLength(13, MinimumLength = 9)]
         public string Phone { get; set; }
         
         [Required(ErrorMessage = "Position is required")]
