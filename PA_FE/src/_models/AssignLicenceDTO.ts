@@ -5,4 +5,5 @@ export interface AssignLicenceDTO {
   employeeName: string; // was EmployeeName
   licenceName: string; // was LicenceName
   assignedOn?: string;
+  validTo?: string;
 }

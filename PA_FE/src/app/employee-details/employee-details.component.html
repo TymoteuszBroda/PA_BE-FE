@@ -65,6 +65,7 @@
         <tr>
           <th>License Name</th>
           <th>Assigned On</th>
+          <th>Expires</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -72,6 +73,7 @@
         <tr *ngFor="let licence of assignedLicences">
           <td>{{ licence.licenceName }}</td>
           <td>{{ licence.assignedOn | date }}</td>
+          <td>{{ licence.validTo | date }}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
