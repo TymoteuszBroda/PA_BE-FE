@@ -16,6 +16,7 @@ export class LicenceDetailsComponent implements OnInit {
   licence: Licence | null = null;
   assignedUsers: AssignLicenceDTO[] = [];
   instances: LicenceInstance[] = [];
+  assignments: { validTo: string; assigned: boolean; employeeName?: string }[] = [];
   errorMessage = '';
 
   constructor(
@@ -46,7 +47,10 @@ export class LicenceDetailsComponent implements OnInit {
 
   loadAssignedUsers(licenceId: number): void {
     this.licenceService.getEmployeesByLicenceId(licenceId).subscribe({
-      next: users => (this.assignedUsers = users),
+      next: users => {
+        this.assignedUsers = users;
+        this.mergeAssignments();
+      },
       error: err => {
         console.error('Error loading users', err);
         this.errorMessage = `Failed to load users: ${err.message}`;
@@ -56,8 +60,23 @@ export class LicenceDetailsComponent implements OnInit {
 
   loadInstances(id: number): void {
     this.licenceService.getLicenceInstances(id).subscribe({
-      next: instances => (this.instances = instances),
+      next: instances => {
+        this.instances = instances;
+        this.mergeAssignments();
+      },
       error: err => console.error('Error loading instances', err)
+    });
+  }
+
+  mergeAssignments(): void {
+    if (!this.instances.length) return;
+    this.assignments = this.instances.map((inst, idx) => {
+      const user = this.assignedUsers[idx];
+      return {
+        validTo: inst.validTo,
+        assigned: !!user,
+        employeeName: user ? user.employeeName : undefined,
+      };
     });
   }
 }
