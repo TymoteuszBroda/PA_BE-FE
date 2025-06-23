@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vl2+EyPthdY=",
+  "dgSpecHash": "pNK4LhBduMs=",
   "success": true,
-  "projectFilePath": "/home/tbroda/Desktop/praca/PermAdminAPI/PermAdminAPI.csproj",
+  "projectFilePath": "/home/tbroda/Desktop/EM/PA_BE/PermAdminAPI.csproj",
   "expectedPackageFiles": [
     "/home/tbroda/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/tbroda/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.3/microsoft.aspnetcore.authentication.jwtbearer.9.0.3.nupkg.sha512",

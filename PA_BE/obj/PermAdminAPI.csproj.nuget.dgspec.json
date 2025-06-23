@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/tbroda/Desktop/praca/PermAdminAPI/PermAdminAPI.csproj": {}
+    "/home/tbroda/Desktop/EM/PA_BE/PermAdminAPI.csproj": {}
   },
   "projects": {
-    "/home/tbroda/Desktop/praca/PermAdminAPI/PermAdminAPI.csproj": {
+    "/home/tbroda/Desktop/EM/PA_BE/PermAdminAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/tbroda/Desktop/praca/PermAdminAPI/PermAdminAPI.csproj",
+        "projectUniqueName": "/home/tbroda/Desktop/EM/PA_BE/PermAdminAPI.csproj",
         "projectName": "PermAdminAPI",
-        "projectPath": "/home/tbroda/Desktop/praca/PermAdminAPI/PermAdminAPI.csproj",
+        "projectPath": "/home/tbroda/Desktop/EM/PA_BE/PermAdminAPI.csproj",
         "packagesPath": "/home/tbroda/.nuget/packages/",
-        "outputPath": "/home/tbroda/Desktop/praca/PermAdminAPI/obj/",
+        "outputPath": "/home/tbroda/Desktop/EM/PA_BE/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/tbroda/.nuget/NuGet/NuGet.Config"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
