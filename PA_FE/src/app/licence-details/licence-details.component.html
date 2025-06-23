@@ -18,41 +18,27 @@
     </div>
   </div>
 
-  <div class="card mb-4" *ngIf="instances.length">
+  <div class="card" *ngIf="assignments.length">
     <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Expiration dates</h4>
+      <h4 class="mb-0">Licence seats</h4>
     </div>
     <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let i of instances">{{ i.validTo | date }}</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">Users with this licence</h4>
-    </div>
-    <div class="card-body">
-      <div *ngIf="assignedUsers.length > 0; else noUsers">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Assigned On</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of assignedUsers">
-              <td>{{ user.employeeName }}</td>
-              <td>{{ user.assignedOn | date }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <ng-template #noUsers>
-        <div class="alert alert-info">No users assigned to this licence.</div>
-      </ng-template>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Assigned</th>
+            <th>Employee</th>
+            <th>Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let seat of assignments">
+            <td>{{ seat.assigned ? 'Yes' : 'No' }}</td>
+            <td>{{ seat.employeeName || '-' }}</td>
+            <td>{{ seat.validTo | date }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
