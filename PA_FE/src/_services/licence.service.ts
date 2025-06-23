@@ -38,6 +38,12 @@ export class LicenceService {
     );
   }
 
+  getEmployeesByLicenceId(licenceId: number): Observable<AssignLicenceDTO[]> {
+    return this.http.get<AssignLicenceDTO[]>(
+      `${this.apiUrl}/assigned-licences/licence/${licenceId}`
+    );
+  }
+
   deleteAssignedLicence(assignmentId: number): Observable<void> {
     return this.http.delete<void>(
       `${this.apiUrl}/assigned-licences/${assignmentId}`
