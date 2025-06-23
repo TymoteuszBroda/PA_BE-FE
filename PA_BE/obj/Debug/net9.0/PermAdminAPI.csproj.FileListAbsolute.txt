@@ -480,3 +480,4 @@
 /home/tbroda/Desktop/EM/PA_BE/obj/Debug/net9.0/PermAdminAPI.pdb
 /home/tbroda/Desktop/EM/PA_BE/obj/Debug/net9.0/PermAdminAPI.genruntimeconfig.cache
 /home/tbroda/Desktop/EM/PA_BE/obj/Debug/net9.0/ref/PermAdminAPI.dll
+/home/tbroda/Desktop/EM/PA_BE/obj/Debug/net9.0/PermAdminAPI.sourcelink.json

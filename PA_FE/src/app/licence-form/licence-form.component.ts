@@ -17,6 +17,7 @@ export class LicenceFormComponent implements OnInit {
     id: 0,
     applicationName: '',
     quantity: 0,
+    validTo: ''
   };
 
   isEditing: boolean = false;
