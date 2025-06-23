@@ -127,13 +127,14 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             var assignedLicences = await context.EmployeeLicences
                 .Include(el => el.Employee)
                 .Include(el => el.Licence)
-                .Select(el => new AssignLicenceDTO 
+                .Select(el => new AssignLicenceDTO
                 {
                     Id = el.id,
                     EmployeeId = el.employeeId,
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
-                    LicenceName = el.Licence.ApplicationName
+                    LicenceName = el.Licence.ApplicationName,
+                    AssignedOn = el.AssignedOn
                 })
                 .ToListAsync();
             
@@ -156,7 +157,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 EmployeeId = employeeLicence.employeeId,
                 LicenceId = employeeLicence.licenceId,
                 EmployeeName = employeeLicence.Employee.FirstName+" "+employeeLicence.Employee.LastName,
-                LicenceName = employeeLicence.Licence.ApplicationName
+                LicenceName = employeeLicence.Licence.ApplicationName,
+                AssignedOn = employeeLicence.AssignedOn
             };
 
             return Ok(dto);
@@ -197,7 +199,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             var employeeLicence = new EmployeeLicence
             {
                 employeeId = request.EmployeeId,
-                licenceId = request.LicenceId
+                licenceId = request.LicenceId,
+                AssignedOn = DateTime.UtcNow
             };
 
             context.EmployeeLicences.Add(employeeLicence);
@@ -211,7 +214,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 EmployeeId = employeeLicence.employeeId,
                 LicenceId = employeeLicence.licenceId,
                 EmployeeName = $"{employee.FirstName} {employee.LastName}",
-                LicenceName = licence.ApplicationName
+                LicenceName = licence.ApplicationName,
+                AssignedOn = employeeLicence.AssignedOn
             });
         }
 
@@ -222,13 +226,14 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 .Where(el => el.employeeId == employeeId)
                 .Include(el => el.Employee)
                 .Include(el => el.Licence)
-                .Select(el => new AssignLicenceDTO 
+                .Select(el => new AssignLicenceDTO
                 {
                     Id = el.id,
                     EmployeeId = el.employeeId,
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
-                    LicenceName = el.Licence.ApplicationName
+                    LicenceName = el.Licence.ApplicationName,
+                    AssignedOn = el.AssignedOn
                 })
                 .ToListAsync();
             
@@ -248,7 +253,8 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                     EmployeeId = el.employeeId,
                     LicenceId = el.licenceId,
                     EmployeeName = $"{el.Employee.FirstName} {el.Employee.LastName}",
-                    LicenceName = el.Licence.ApplicationName
+                    LicenceName = el.Licence.ApplicationName,
+                    AssignedOn = el.AssignedOn
                 })
                 .ToListAsync();
 
