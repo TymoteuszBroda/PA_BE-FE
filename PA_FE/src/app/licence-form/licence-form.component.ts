@@ -17,7 +17,9 @@ export class LicenceFormComponent implements OnInit {
     id: 0,
     applicationName: '',
     quantity: 0,
-    validTo: ''
+    validTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .substring(0, 10)
   };
 
   isEditing: boolean = false;
@@ -36,7 +38,10 @@ export class LicenceFormComponent implements OnInit {
         this.isEditing = true;
         this.licenceService.getLicenceById(parseInt(id)).subscribe({
           next: (result) => {
-            this.licence = result;
+            this.licence = {
+              ...result,
+              validTo: result.validTo.substring(0, 10),
+            };
           },
           error: (err) => {
             console.error('Error loading licence', err);
