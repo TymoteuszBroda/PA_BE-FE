@@ -25,6 +25,8 @@ export class LicenceFormComponent implements OnInit {
   isEditing: boolean = false;
   errorMessage = '';
 
+  existingNames: string[] = [];
+
   constructor(
     private licenceService: LicenceService,
     private router: Router,
@@ -32,6 +34,9 @@ export class LicenceFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.licenceService.getLicences().subscribe(ls => {
+      this.existingNames = ls.map(l => l.applicationName);
+    });
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
@@ -49,6 +54,14 @@ export class LicenceFormComponent implements OnInit {
         });
       }
     });
+  }
+
+  onNameChange(value: string): void {
+    if (value === 'New license name') {
+      this.licence.applicationName = '';
+    } else if (this.existingNames.includes(value)) {
+      this.licence.applicationName = value;
+    }
   }
 
   onSubmit(): void {
