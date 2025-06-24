@@ -5,7 +5,7 @@
     <label for="licenceSelect" class="form-label">Select a License:</label>
     <select id="licenceSelect" class="form-select" [(ngModel)]="selectedLicenceId">
       <option *ngFor="let licence of licences" [value]="licence.id">
-        {{ licence.applicationName }} ({{ licence.quantity }} available)
+        {{ licence.applicationName }} ({{ licence.availableLicences }} available)
       </option>
     </select>
 

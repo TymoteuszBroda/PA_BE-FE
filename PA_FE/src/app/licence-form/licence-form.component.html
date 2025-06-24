@@ -21,15 +21,15 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Quantity*</label>
-        <input required #quantity="ngModel" class="form-control"
-               type="number" name="quantity" [(ngModel)]="licence.quantity" min="0"/>
-        <div *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
-            <div class="text-danger" *ngIf="quantity.errors?.['required']">
-                Quantity is required
+        <label class="form-label">Available Licences*</label>
+        <input required #available="ngModel" class="form-control"
+               type="number" name="availableLicences" [(ngModel)]="licence.availableLicences" min="0"/>
+        <div *ngIf="available.invalid && (available.touched || available.dirty)">
+            <div class="text-danger" *ngIf="available.errors?.['required']">
+                Available licences is required
             </div>
-            <div class="text-danger" *ngIf="quantity.errors?.['min']">
-                Quantity must be 0 or higher
+            <div class="text-danger" *ngIf="available.errors?.['min']">
+                Value must be 0 or higher
             </div>
         </div>
     </div>

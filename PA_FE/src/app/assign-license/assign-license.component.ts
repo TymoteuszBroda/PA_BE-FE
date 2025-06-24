@@ -37,7 +37,7 @@ export class AssignLicenseComponent implements OnInit {
   loadAvailableLicences(): void {
     this.licenceService.getLicences().subscribe({
       next: (licences) => {
-        this.licences = licences.filter((licence) => licence.quantity > 0);
+        this.licences = licences.filter((licence) => licence.availableLicences > 0);
       },
       error: (err) => {
         console.error('Error loading licenses:', err);
@@ -63,9 +63,9 @@ export class AssignLicenseComponent implements OnInit {
           (l) => l.id === this.selectedLicenceId
         );
         if (assignedLicence) {
-          assignedLicence.quantity--;
+          assignedLicence.availableLicences--;
 
-          if (assignedLicence.quantity === 0) {
+          if (assignedLicence.availableLicences === 0) {
             this.licences = this.licences.filter(
               (l) => l.id !== this.selectedLicenceId
             );

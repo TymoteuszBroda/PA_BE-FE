@@ -39,12 +39,12 @@ export class LicenceTableComponent {
     this.router.navigate(['licenceDetails/', id]);
   }
 
-    decreaseQuantity(licence: Licence): void {
-    if (licence.quantity > 0) {
-      const updatedLicence = { ...licence, quantity: licence.quantity - 1 };
+  decreaseQuantity(licence: Licence): void {
+    if (licence.availableLicences > 0) {
+      const updatedLicence = { ...licence, availableLicences: licence.availableLicences - 1 };
 
       this.licenceService.editLicence(updatedLicence).subscribe(() => {
-        licence.quantity--;
+        licence.availableLicences--;
       });
     }
   }

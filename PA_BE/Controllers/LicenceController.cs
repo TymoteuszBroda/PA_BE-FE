@@ -16,6 +16,13 @@ namespace PermAdminAPI.Controllers
         public async Task<ActionResult<IEnumerable<Licence>>> GetLicences()
         {
             var licences = await context.Licences.ToListAsync();
+
+            foreach (var licence in licences)
+            {
+                licence.Quantity = await context.LicenceInstances
+                    .CountAsync(li => li.LicenceId == licence.id);
+            }
+
             return Ok(licences);
         }
 
@@ -24,6 +31,10 @@ namespace PermAdminAPI.Controllers
         {
             var licence = await context.Licences.FindAsync(id);
             if (licence == null) return NotFound();
+
+            licence.Quantity = await context.LicenceInstances
+                .CountAsync(li => li.LicenceId == licence.id);
+
             return Ok(licence);
         }
 
@@ -35,10 +46,10 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
 
     if (existingLicence != null)
     {
-        existingLicence.Quantity += licence.Quantity;
+        existingLicence.AvailableLicences += licence.AvailableLicences;
         existingLicence.ValidTo = licence.ValidTo;
 
-        for (int i = 0; i < licence.Quantity; i++)
+        for (int i = 0; i < licence.AvailableLicences; i++)
         {
             context.LicenceInstances.Add(new LicenceInstance
             {
@@ -55,7 +66,7 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
         context.Licences.Add(licence);
         await context.SaveChangesAsync();
 
-        for (int i = 0; i < licence.Quantity; i++)
+        for (int i = 0; i < licence.AvailableLicences; i++)
         {
             context.LicenceInstances.Add(new LicenceInstance
             {
@@ -186,7 +197,7 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
                 return NotFound("Licence not found");
             }
 
-            if (licence.Quantity <= 0)
+            if (licence.AvailableLicences <= 0)
             {
                 return BadRequest("Licence quantity exhausted");
             }
@@ -206,7 +217,7 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             };
 
             context.EmployeeLicences.Add(employeeLicence);
-            licence.Quantity--;
+            licence.AvailableLicences--;
             
             await context.SaveChangesAsync();
 
@@ -275,7 +286,7 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             var licence = await context.Licences.FindAsync(employeeLicence.licenceId);
             if (licence != null)
             {
-                licence.Quantity++;
+                licence.AvailableLicences++;
             }
 
             context.EmployeeLicences.Remove(employeeLicence);

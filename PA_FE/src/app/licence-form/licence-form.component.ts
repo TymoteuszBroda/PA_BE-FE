@@ -16,6 +16,7 @@ export class LicenceFormComponent implements OnInit {
   licence: Licence = {
     id: 0,
     applicationName: '',
+    availableLicences: 0,
     quantity: 0,
     validTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
       .toISOString()
