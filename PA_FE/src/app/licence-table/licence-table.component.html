@@ -8,6 +8,7 @@
       <tr>
         <th>Id</th>
         <th>Name</th>
+        <th>Available Licences</th>
         <th>Quantity</th>
         <th>Actions</th>
       </tr>
@@ -16,11 +17,12 @@
       <tr *ngFor = "let licence of licences">
         <td>{{licence.id}}</td>
         <td>{{licence.applicationName}}</td>
+        <td>{{licence.availableLicences}}</td>
         <td>{{licence.quantity}}</td>
         <td>
             <button class="btn btn-primary m-2 btn-sm" (click)="showLicenceDetails(licence.id)">Users</button>
             <button class="btn btn-primary m-2 btn-sm"(click)="editLicence(licence.id)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="decreaseQuantity(licence)" [disabled]="licence.quantity === 0">Delete</button>
+            <button class="btn btn-danger btn-sm" (click)="decreaseQuantity(licence)" [disabled]="licence.availableLicences === 0">Delete</button>
 
 
         </td>
