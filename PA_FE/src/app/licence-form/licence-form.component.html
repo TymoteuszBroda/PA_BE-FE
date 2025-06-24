@@ -7,7 +7,12 @@
     <div class="mb-3">
         <label class="form-label">Application Name*</label>
         <input required #applicationName="ngModel" class="form-control"
-               type="text" name="applicationName" [(ngModel)]="licence.applicationName"/>
+               type="text" name="applicationName" list="licenceNames" (change)="onNameChange(applicationName.value)"
+               [(ngModel)]="licence.applicationName"/>
+        <datalist id="licenceNames">
+          <option value="New license name"></option>
+          <option *ngFor="let name of existingNames" [value]="name"></option>
+        </datalist>
         <div *ngIf="applicationName.invalid && (applicationName.touched || applicationName.dirty)">
             <div class="text-danger" *ngIf="applicationName.errors?.['required']">
                 Application name is required
