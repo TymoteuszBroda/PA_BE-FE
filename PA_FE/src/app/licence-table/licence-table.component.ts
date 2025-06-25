@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Licence } from '../../_models/Licence';
+import { LicenceInstance } from '../../_models/LicenceInstance';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LicenceService } from '../../_services/licence.service';
@@ -11,14 +12,25 @@ import { LicenceService } from '../../_services/licence.service';
 })
 export class LicenceTableComponent implements OnInit {
   licences: Licence[] = [];
+  expiryAlerts: { [key: number]: boolean } = {};
 
   constructor(private licenceService: LicenceService, private router: Router) {}
 
   ngOnInit() {
     this.licenceService.getLicences().subscribe((data: Licence[]) => {
       this.licences = data;
-
-      console.log(data);
+      for (const licence of data) {
+        this.licenceService.getLicenceInstances(licence.id).subscribe({
+          next: (instances: LicenceInstance[]) => {
+            this.expiryAlerts[licence.id] = instances.some((inst) =>
+              this.isDateWithinTwoWeeks(inst.validTo)
+            );
+          },
+          error: () => {
+            this.expiryAlerts[licence.id] = this.isDateWithinTwoWeeks(licence.validTo);
+          },
+        });
+      }
     });
   }
   deleteLicences(id: number): void {
@@ -48,11 +60,15 @@ export class LicenceTableComponent implements OnInit {
     }
   }
 
-  isExpiringSoon(validTo: string): boolean {
-    const expiry = new Date(validTo);
+  private isDateWithinTwoWeeks(date: string): boolean {
+    const expiry = new Date(date);
     const now = new Date();
     const twoWeeksAhead = new Date();
     twoWeeksAhead.setDate(now.getDate() + 14);
     return expiry <= twoWeeksAhead;
+  }
+
+  isExpiringSoon(id: number): boolean {
+    return this.expiryAlerts[id];
   }
 }
