@@ -29,6 +29,7 @@
             <th>Assigned</th>
             <th>Employee</th>
             <th>Expires</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +37,15 @@
             <td>{{ seat.assigned ? 'Yes' : 'No' }}</td>
             <td>{{ seat.employeeName || '-' }}</td>
             <td>{{ seat.validTo | date }}</td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteInstance(seat.instanceId)"
+                [disabled]="seat.assigned || seat.instanceId === undefined"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

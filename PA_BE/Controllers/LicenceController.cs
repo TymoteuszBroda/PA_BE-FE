@@ -155,6 +155,26 @@ public async Task<ActionResult<Licence>> CreateLicence(Licence licence)
             return NoContent();
         }
 
+        [HttpDelete("instance/{instanceId}")]
+        public async Task<IActionResult> DeleteLicenceInstanceById(int instanceId)
+        {
+            var instance = await context.LicenceInstances.FindAsync(instanceId);
+            if (instance == null) return NotFound();
+
+            var licence = await context.Licences.FindAsync(instance.LicenceId);
+
+            context.LicenceInstances.Remove(instance);
+
+            if (licence != null && licence.AvailableLicences > 0)
+            {
+                licence.AvailableLicences--;
+            }
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpGet("assigned-licences")]
         public async Task<ActionResult<IEnumerable<AssignLicenceDTO>>> GetAssignedLicences()
         {
