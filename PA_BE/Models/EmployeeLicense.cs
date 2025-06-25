@@ -2,12 +2,12 @@ using System;
 
 namespace PermAdminAPI.Models;
 
-public class EmployeeLicence
+public class EmployeeLicense
 {
     public int id { get; set; }
     public int employeeId { get; set; }
     public Employee Employee { get; set; }
-    public int licenceId { get; set; }
-    public Licence Licence { get; set; }
+    public int licenseId { get; set; }
+    public License License { get; set; }
     public DateTime AssignedOn { get; set; }
 }

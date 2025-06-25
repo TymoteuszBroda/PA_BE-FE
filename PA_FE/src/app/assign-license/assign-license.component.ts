@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Licence } from '../../_models/Licence';
-import { AssignLicenceDTO } from '../../_models/AssignLicenceDTO';
-import { LicenceService } from '../../_services/licence.service';
+import { License } from '../../_models/License';
+import { AssignLicenseDTO } from '../../_models/AssignLicenseDTO';
+import { LicenseService } from '../../_services/license.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,13 +13,13 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
 })
 export class AssignLicenseComponent implements OnInit {
-  licences: Licence[] = [];
+  licenses: License[] = [];
   employeeId!: number;
-  selectedLicenceId: number | null = null;
+  selectedLicenseId: number | null = null;
   errorMessage = '';
 
   constructor(
-    private licenceService: LicenceService,
+    private licenseService: LicenseService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -29,15 +29,15 @@ export class AssignLicenseComponent implements OnInit {
       const id = params.get('employeeId');
       if (id) {
         this.employeeId = +id;
-        this.loadAvailableLicences();
+        this.loadAvailableLicenses();
       }
     });
   }
 
-  loadAvailableLicences(): void {
-    this.licenceService.getLicences().subscribe({
-      next: (licences) => {
-        this.licences = licences.filter((licence) => licence.availableLicences > 0);
+  loadAvailableLicenses(): void {
+    this.licenseService.getLicenses().subscribe({
+      next: (licenses) => {
+        this.licenses = licenses.filter((license) => license.availableLicenses > 0);
       },
       error: (err) => {
         console.error('Error loading licenses:', err);
@@ -46,33 +46,33 @@ export class AssignLicenseComponent implements OnInit {
     });
   }
 
-  assignLicence(): void {
-    if (!this.selectedLicenceId) return;
+  assignLicense(): void {
+    if (!this.selectedLicenseId) return;
 
-    const assignDto: AssignLicenceDTO = {
+    const assignDto: AssignLicenseDTO = {
       employeeId: this.employeeId,
-      licenceId: this.selectedLicenceId,
+      licenseId: this.selectedLicenseId,
       employeeName: '',
-      licenceName: '',
+      licenseName: '',
       id: 0,
     };
 
-    this.licenceService.assignLicence(assignDto).subscribe({
+    this.licenseService.assignLicense(assignDto).subscribe({
       next: () => {
-        const assignedLicence = this.licences.find(
-          (l) => l.id === this.selectedLicenceId
+        const assignedLicense = this.licenses.find(
+          (l) => l.id === this.selectedLicenseId
         );
-        if (assignedLicence) {
-          assignedLicence.availableLicences--;
+        if (assignedLicense) {
+          assignedLicense.availableLicenses--;
 
-          if (assignedLicence.availableLicences === 0) {
-            this.licences = this.licences.filter(
-              (l) => l.id !== this.selectedLicenceId
+          if (assignedLicense.availableLicenses === 0) {
+            this.licenses = this.licenses.filter(
+              (l) => l.id !== this.selectedLicenseId
             );
           }
         }
 
-        this.selectedLicenceId = null;
+        this.selectedLicenseId = null;
       },
       error: (err) => {
         this.errorMessage = `Error assigning license: ${err.message}`;

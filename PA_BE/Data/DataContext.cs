@@ -11,9 +11,9 @@ namespace PermAdminAPI.Data
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Employee> Employees {get; set;}
-        public DbSet<Licence> Licences {get; set;}
-        public DbSet<EmployeeLicence> EmployeeLicences {get; set;}
-        public DbSet<LicenceInstance> LicenceInstances {get; set;}
+        public DbSet<License> Licenses {get; set;}
+        public DbSet<EmployeeLicense> EmployeeLicenses {get; set;}
+        public DbSet<LicenseInstance> LicenseInstances {get; set;}
     }
 }
 
