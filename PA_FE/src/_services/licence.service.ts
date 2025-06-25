@@ -25,6 +25,10 @@ export class LicenceService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  deleteLicenceInstance(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}/instance`);
+  }
+
   getLicenceById(id: number): Observable<Licence> {
     return this.http.get<Licence>(`${this.apiUrl}/${id}`);
   }

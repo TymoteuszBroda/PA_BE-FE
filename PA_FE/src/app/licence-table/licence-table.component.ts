@@ -41,10 +41,9 @@ export class LicenceTableComponent implements OnInit {
 
   decreaseQuantity(licence: Licence): void {
     if (licence.availableLicences > 0) {
-      const updatedLicence = { ...licence, availableLicences: licence.availableLicences - 1 };
-
-      this.licenceService.editLicence(updatedLicence).subscribe(() => {
+      this.licenceService.deleteLicenceInstance(licence.id).subscribe(() => {
         licence.availableLicences--;
+        licence.quantity--;
       });
     }
   }
