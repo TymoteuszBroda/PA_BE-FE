@@ -1,20 +1,20 @@
 <div class="container mt-4">
   <h3>Assign a License</h3>
 
-  <div *ngIf="licences.length > 0; else noLicences">
-    <label for="licenceSelect" class="form-label">Select a License:</label>
-    <select id="licenceSelect" class="form-select" [(ngModel)]="selectedLicenceId">
-      <option *ngFor="let licence of licences" [value]="licence.id">
-        {{ licence.applicationName }} ({{ licence.availableLicences }} available)
+  <div *ngIf="licenses.length > 0; else noLicenses">
+    <label for="licenseSelect" class="form-label">Select a License:</label>
+    <select id="licenseSelect" class="form-select" [(ngModel)]="selectedLicenseId">
+      <option *ngFor="let license of licenses" [value]="license.id">
+        {{ license.applicationName }} ({{ license.availableLicenses }} available)
       </option>
     </select>
 
-    <button class="btn btn-primary mt-3" (click)="assignLicence()" [disabled]="!selectedLicenceId">
+    <button class="btn btn-primary mt-3" (click)="assignLicense()" [disabled]="!selectedLicenseId">
       Assign License
     </button>
   </div>
 
-  <ng-template #noLicences>
+  <ng-template #noLicenses>
     <div class="alert alert-info">No available licenses to assign.</div>
   </ng-template>
 

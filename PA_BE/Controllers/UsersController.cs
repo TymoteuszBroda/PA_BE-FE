@@ -34,17 +34,13 @@ namespace PermAdminAPI.Controllers
         [HttpDelete("delete-all")]
         public async Task<ActionResult> DeleteAllUsers()
         {
-            // Retrieve all users from the database
             var users = await _context.Users.ToListAsync();
 
-            // Remove all users from the context
             _context.Users.RemoveRange(users);
 
-            // Save changes to the database
             await _context.SaveChangesAsync();
 
-            // Return a successful response
-            return NoContent();  // 204 No Content status
+            return NoContent();
         }
 
     }
