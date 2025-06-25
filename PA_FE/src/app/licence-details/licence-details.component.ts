@@ -16,7 +16,7 @@ export class LicenceDetailsComponent implements OnInit {
   licence: Licence | null = null;
   assignedUsers: AssignLicenceDTO[] = [];
   instances: LicenceInstance[] = [];
-  assignments: { validTo: string; assigned: boolean; employeeName?: string }[] = [];
+  assignments: { instanceId?: number; validTo: string; assigned: boolean; employeeName?: string }[] = [];
   errorMessage = '';
 
   constructor(
@@ -80,10 +80,24 @@ export class LicenceDetailsComponent implements OnInit {
       const inst = this.instances[idx];
       const user = this.assignedUsers[idx];
       return {
+        instanceId: inst ? inst.id : undefined,
         validTo: inst ? inst.validTo : this.licence!.validTo,
         assigned: !!user,
         employeeName: user ? user.employeeName : undefined,
       };
+    });
+  }
+
+  deleteInstance(instanceId: number | undefined): void {
+    if (!instanceId || !this.licence) return;
+    this.licenceService.deleteLicenceInstanceById(instanceId).subscribe({
+      next: () => {
+        this.instances = this.instances.filter(i => i.id !== instanceId);
+        this.licence!.availableLicences--;
+        this.licence!.quantity--;
+        this.mergeAssignments();
+      },
+      error: err => console.error('Error deleting instance', err)
     });
   }
 }
