@@ -9,7 +9,7 @@ import { LicenceService } from '../../_services/licence.service';
   templateUrl: './licence-table.component.html',
   styleUrl: './licence-table.component.css',
 })
-export class LicenceTableComponent {
+export class LicenceTableComponent implements OnInit {
   licences: Licence[] = [];
 
   constructor(private licenceService: LicenceService, private router: Router) {}
@@ -47,5 +47,13 @@ export class LicenceTableComponent {
         licence.availableLicences--;
       });
     }
+  }
+
+  isExpiringSoon(validTo: string): boolean {
+    const expiry = new Date(validTo);
+    const now = new Date();
+    const twoWeeksAhead = new Date();
+    twoWeeksAhead.setDate(now.getDate() + 14);
+    return expiry <= twoWeeksAhead;
   }
 }
