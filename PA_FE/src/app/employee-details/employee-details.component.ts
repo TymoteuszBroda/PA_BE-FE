@@ -74,4 +74,15 @@ export class EmployeeDetailsComponent implements OnInit {
       });
     }
   }
+
+  isExpiringSoon(validTo?: string): boolean {
+    if (!validTo) {
+      return false;
+    }
+    const expiry = new Date(validTo);
+    const now = new Date();
+    const twoWeeksAhead = new Date();
+    twoWeeksAhead.setDate(now.getDate() + 14);
+    return expiry <= twoWeeksAhead;
+  }
 }

@@ -66,14 +66,16 @@
           <th>License Name</th>
           <th>Assigned On</th>
           <th>Expires</th>
+          <th>Alert</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let licence of assignedLicences">
+        <tr *ngFor="let licence of assignedLicences" [ngClass]="{ 'table-danger': isExpiringSoon(licence.validTo) }">
           <td>{{ licence.licenceName }}</td>
           <td>{{ licence.assignedOn | date }}</td>
           <td>{{ licence.validTo | date }}</td>
+          <td>{{ isExpiringSoon(licence.validTo) ? 'expires within two weeks' : '' }}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
