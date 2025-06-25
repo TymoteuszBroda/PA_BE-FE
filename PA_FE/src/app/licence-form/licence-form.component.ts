@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { License } from '../../_models/License';
-import { LicenseService } from '../../_services/license.service';
+import { Licence } from '../../_models/Licence';
+import { LicenceService } from '../../_services/licence.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-license-form',
+  selector: 'app-licence-form',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './license-form.component.html',
-  styleUrl: './license-form.component.css',
+  templateUrl: './licence-form.component.html',
+  styleUrl: './licence-form.component.css',
 })
-export class LicenseFormComponent implements OnInit {
-  license: License = {
+export class LicenceFormComponent implements OnInit {
+  licence: Licence = {
     id: 0,
     applicationName: '',
-    availableLicenses: 0,
+    availableLicences: 0,
     quantity: 0,
     validTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
       .toISOString()
@@ -29,28 +29,28 @@ export class LicenseFormComponent implements OnInit {
   existingNames: string[] = [];
 
   constructor(
-    private licenseService: LicenseService,
+    private licenceService: LicenceService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.licenseService.getLicenses().subscribe(ls => {
+    this.licenceService.getLicences().subscribe(ls => {
       this.existingNames = ls.map(l => l.applicationName);
     });
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
         this.isEditing = true;
-        this.licenseService.getLicenseById(parseInt(id)).subscribe({
+        this.licenceService.getLicenceById(parseInt(id)).subscribe({
           next: (result) => {
-            this.license = {
+            this.licence = {
               ...result,
               validTo: result.validTo.substring(0, 10),
             };
           },
           error: (err) => {
-            console.error('Error loading license', err);
+            console.error('Error loading licence', err);
           },
         });
       }
@@ -59,16 +59,17 @@ export class LicenseFormComponent implements OnInit {
 
   onNameChange(value: string): void {
     if (value === 'New license name') {
-      this.license.applicationName = '';
+      this.licence.applicationName = '';
     } else if (this.existingNames.includes(value)) {
-      this.license.applicationName = value;
+      this.licence.applicationName = value;
     }
   }
 
   onSubmit(): void {
     if (!this.isEditing) {
-      this.licenseService.createLicense(this.license).subscribe({
+      this.licenceService.createLicence(this.licence).subscribe({
         next: (response) => {
+          // Navigate back to the home page after creating a licence
           this.router.navigate(['/']);
         },
         error: (err) => {
@@ -77,8 +78,9 @@ export class LicenseFormComponent implements OnInit {
         },
       });
     } else {
-      this.licenseService.editLicense(this.license).subscribe({
+      this.licenceService.editLicence(this.licence).subscribe({
         next: (response) => {
+          // Navigate back to the home page after editing a licence
           this.router.navigate(['/']);
         },
         error: (err) => {

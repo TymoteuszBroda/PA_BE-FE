@@ -1,17 +1,17 @@
 <div class="container mt-5">
   <div class="card mb-4">
     <div class="card-header bg-primary text-white">
-      <h2 class="mb-0">License Information</h2>
+      <h2 class="mb-0">Licence Information</h2>
     </div>
-    <div class="card-body" *ngIf="license">
+    <div class="card-body" *ngIf="licence">
       <ul class="list-group">
-        <li class="list-group-item"><strong>ID:</strong> {{ license.id }}</li>
-        <li class="list-group-item"><strong>Name:</strong> {{ license.applicationName }}</li>
-        <li class="list-group-item"><strong>Available:</strong> {{ license.availableLicenses }}</li>
-        <li class="list-group-item"><strong>Expires:</strong> {{ license.validTo | date }}</li>
+        <li class="list-group-item"><strong>ID:</strong> {{ licence.id }}</li>
+        <li class="list-group-item"><strong>Name:</strong> {{ licence.applicationName }}</li>
+        <li class="list-group-item"><strong>Available:</strong> {{ licence.availableLicences }}</li>
+        <li class="list-group-item"><strong>Expires:</strong> {{ licence.validTo | date }}</li>
       </ul>
     </div>
-    <div *ngIf="!license" class="card-body text-center">
+    <div *ngIf="!licence" class="card-body text-center">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -20,7 +20,7 @@
 
   <div class="card" *ngIf="assignments.length">
     <div class="card-header bg-primary text-white">
-      <h4 class="mb-0">License seats</h4>
+      <h4 class="mb-0">Licence seats</h4>
     </div>
     <div class="card-body">
       <table class="table table-striped">

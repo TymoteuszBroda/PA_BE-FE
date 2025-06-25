@@ -1,7 +1,7 @@
-export interface License {
+export interface Licence {
   id: number;
   applicationName: string;
-  availableLicenses: number;
+  availableLicences: number;
   quantity: number;
   validTo: string;
 }

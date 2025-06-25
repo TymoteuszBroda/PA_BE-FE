@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../_models/Employee';
-import { AssignLicenseDTO } from '../../_models/AssignLicenseDTO';
+import { AssignLicenceDTO } from '../../_models/AssignLicenceDTO';
 import { EmployeeService } from '../../_services/employee.service';
-import { LicenseService } from '../../_services/license.service';
+import { LicenceService } from '../../_services/licence.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -22,12 +22,12 @@ export class EmployeeDetailsComponent implements OnInit {
     position: '',
   };
 
-  assignedLicenses: AssignLicenseDTO[] = [];
+  assignedLicences: AssignLicenceDTO[] = [];
   errorMessage = '';
 
   constructor(
     private employeeService: EmployeeService,
-    private licenseService: LicenseService,
+    private licenceService: LicenceService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -37,7 +37,7 @@ export class EmployeeDetailsComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.loadEmployee(+id);
-        this.loadAssignedLicenses(+id);
+        this.loadAssignedLicences(+id);
       }
     });
   }
@@ -52,19 +52,19 @@ export class EmployeeDetailsComponent implements OnInit {
     });
   }
 
-  loadAssignedLicenses(employeeId: number): void {
-    this.licenseService.getLicensesByEmployeeId(employeeId).subscribe({
-      next: (licenses) => (this.assignedLicenses = licenses),
+  loadAssignedLicences(employeeId: number): void {
+    this.licenceService.getLicencesByEmployeeId(employeeId).subscribe({
+      next: (licences) => (this.assignedLicences = licences),
       error: (err) =>
-        (this.errorMessage = `Error loading licenses: ${err.message}`),
+        (this.errorMessage = `Error loading licences: ${err.message}`),
     });
   }
 
   onDeleteAssignment(assignmentId: number): void {
-    if (confirm('Are you sure you want to remove this license assignment?')) {
-      this.licenseService.deleteAssignedLicense(assignmentId).subscribe({
+    if (confirm('Are you sure you want to remove this licence assignment?')) {
+      this.licenceService.deleteAssignedLicence(assignmentId).subscribe({
         next: () => {
-          this.assignedLicenses = this.assignedLicenses.filter(
+          this.assignedLicences = this.assignedLicences.filter(
             (al) => al.id !== assignmentId
           );
         },

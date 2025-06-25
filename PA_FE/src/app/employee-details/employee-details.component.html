@@ -59,7 +59,7 @@
   <h5>Assigned Licenses</h5>
 
 
-  <div *ngIf="assignedLicenses.length > 0; else noLicenses">
+  <div *ngIf="assignedLicences.length > 0; else noLicenses">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -71,15 +71,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let license of assignedLicenses" [ngClass]="{ 'table-danger': isExpiringSoon(license.validTo) }">
-          <td>{{ license.licenseName }}</td>
-          <td>{{ license.assignedOn | date }}</td>
-          <td>{{ license.validTo | date }}</td>
-          <td>{{ isExpiringSoon(license.validTo) ? 'expires within two weeks' : '' }}</td>
+        <tr *ngFor="let licence of assignedLicences" [ngClass]="{ 'table-danger': isExpiringSoon(licence.validTo) }">
+          <td>{{ licence.licenceName }}</td>
+          <td>{{ licence.assignedOn | date }}</td>
+          <td>{{ licence.validTo | date }}</td>
+          <td>{{ isExpiringSoon(licence.validTo) ? 'expires within two weeks' : '' }}</td>
           <td>
             <button
               class="btn btn-danger btn-sm"
-              (click)="onDeleteAssignment(license.id)">
+              (click)="onDeleteAssignment(licence.id)">
               <i class="bi bi-trash"></i> Remove
             </button>
           </td>
