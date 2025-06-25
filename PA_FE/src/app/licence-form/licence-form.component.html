@@ -3,13 +3,13 @@
   {{errorMessage}}
 </div>
 
-<form *ngIf="errorMessage===''" (ngSubmit)="onSubmit()" #licenseForm="ngForm" class="border rounded p-5 w-50 mx-auto">
+<form *ngIf="errorMessage===''" (ngSubmit)="onSubmit()" #licenceForm="ngForm" class="border rounded p-5 w-50 mx-auto">
     <div class="mb-3">
         <label class="form-label">Application Name*</label>
         <input required #applicationName="ngModel" class="form-control"
-               type="text" name="applicationName" list="licenseNames" (change)="onNameChange(applicationName.value)"
-               [(ngModel)]="license.applicationName"/>
-        <datalist id="licenseNames">
+               type="text" name="applicationName" list="licenceNames" (change)="onNameChange(applicationName.value)"
+               [(ngModel)]="licence.applicationName"/>
+        <datalist id="licenceNames">
           <option value="New license name"></option>
           <option *ngFor="let name of existingNames" [value]="name"></option>
         </datalist>
@@ -21,12 +21,12 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Available Licenses*</label>
+        <label class="form-label">Available Licences*</label>
         <input required #available="ngModel" class="form-control"
-               type="number" name="availableLicenses" [(ngModel)]="license.availableLicenses" min="0"/>
+               type="number" name="availableLicences" [(ngModel)]="licence.availableLicences" min="0"/>
         <div *ngIf="available.invalid && (available.touched || available.dirty)">
             <div class="text-danger" *ngIf="available.errors?.['required']">
-                Available licenses is required
+                Available licences is required
             </div>
             <div class="text-danger" *ngIf="available.errors?.['min']">
                 Value must be 0 or higher
@@ -37,7 +37,7 @@
     <div class="mb-3">
         <label class="form-label">Expiration Date*</label>
         <input required #validTo="ngModel" class="form-control"
-               type="date" name="validTo" [(ngModel)]="license.validTo"/>
+               type="date" name="validTo" [(ngModel)]="licence.validTo"/>
         <div *ngIf="validTo.invalid && (validTo.touched || validTo.dirty)">
             <div class="text-danger" *ngIf="validTo.errors?.['required']">
                 Expiration date is required
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <button class="btn btn-primary btn-lg" type="submit" [disabled]="licenseForm.invalid">
+    <button class="btn btn-primary btn-lg" type="submit" [disabled]="licenceForm.invalid">
         {{isEditing? 'Update' : 'Create'}}
     </button>
 </form>

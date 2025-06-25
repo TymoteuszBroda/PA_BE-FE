@@ -2,11 +2,11 @@ using System;
 
 namespace PermAdminAPI.Models;
 
-public class LicenseInstance
+public class LicenceInstance
 {
     public int Id { get; set; }
-    public int LicenseId { get; set; }
+    public int LicenceId { get; set; }
     public required DateTime ValidTo { get; set; }
 
-    public License License { get; set; }
+    public Licence Licence { get; set; }
 }
